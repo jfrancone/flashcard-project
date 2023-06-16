@@ -31,6 +31,7 @@ class Engine():
         self.french_words_list = self.french_words.to_list()
         self.random_card = None
 
+        self.flip_timer = self.window.after(3000, self.flip_card)
         self.pick_random_card()
 
         #Buttons
@@ -47,12 +48,13 @@ class Engine():
 
 
     def pick_random_card(self):
+        self.window.after_cancel(self.flip_timer)
         self.random_card = random.choice(self.words_to_learn)
         french_side = self.random_card["French"]
         self.canvas.itemconfig(self.card_img, image = self.card_front_img)
         self.canvas.itemconfig(self.card_word, text = french_side, fill = 'black')
         self.canvas.itemconfig(self.language_name_img, text = "French", fill = 'black')
-        self.window.after(3000, self.flip_card)
+        self.flip_timer = self.window.after(3000, self.flip_card)
 
     def flip_card(self):
         english_side = self.random_card["English"]
