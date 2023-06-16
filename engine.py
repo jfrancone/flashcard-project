@@ -29,6 +29,7 @@ class Engine():
         self.words_to_learn = self.french_flashcards.to_dict(orient='records')
         self.french_words = self.french_flashcards['French']
         self.french_words_list = self.french_words.to_list()
+        self.random_card = None
 
         self.pick_random_card()
 
@@ -46,15 +47,15 @@ class Engine():
 
 
     def pick_random_card(self):
-        random_card = random.choice(self.words_to_learn)
-        french_side = random_card["French"]
+        self.random_card = random.choice(self.words_to_learn)
+        french_side = self.random_card["French"]
         self.canvas.itemconfig(self.card_img, image = self.card_front_img)
         self.canvas.itemconfig(self.card_word, text = french_side, fill = 'black')
         self.canvas.itemconfig(self.language_name_img, text = "French", fill = 'black')
-        self.window.after(3000, self.flip_card, random_card)
+        self.window.after(3000, self.flip_card)
 
-    def flip_card(self, random_card):
-        english_side = random_card["English"]
+    def flip_card(self):
+        english_side = self.random_card["English"]
         self.canvas.itemconfig(self.card_img, image = self.card_back_img)
         self.canvas.itemconfig(self.card_word, text = english_side, fill = 'white')
         self.canvas.itemconfig(self.language_name_img, text = "English", fill = 'white')
