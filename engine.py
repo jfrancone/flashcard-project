@@ -49,15 +49,15 @@ class Engine():
         random_card = random.choice(self.words_to_learn)
         french_side = random_card["French"]
         self.canvas.itemconfig(self.card_img, image = self.card_front_img)
-        self.canvas.itemconfig(self.card_word, text = french_side)
-        self.canvas.itemconfig(self.language_name_img, text = "French")
+        self.canvas.itemconfig(self.card_word, text = french_side, fill = 'black')
+        self.canvas.itemconfig(self.language_name_img, text = "French", fill = 'black')
         self.window.after(3000, self.flip_card, random_card)
 
     def flip_card(self, random_card):
         english_side = random_card["English"]
         self.canvas.itemconfig(self.card_img, image = self.card_back_img)
-        self.canvas.itemconfig(self.card_word, text = english_side)
-        self.canvas.itemconfig(self.language_name_img, text = "English")
+        self.canvas.itemconfig(self.card_word, text = english_side, fill = 'white')
+        self.canvas.itemconfig(self.language_name_img, text = "English", fill = 'white')
             
             
 
